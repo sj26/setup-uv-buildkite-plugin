@@ -1,0 +1,7 @@
+name: Setup uv
+description: Install uv for use in Buildkite builds
+author: https://github.com/sj26
+requirements:
+  - curl
+  - jq
+  - bash

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "~~~ Setup uv"
+
+if command -v uv &>/dev/null; then
+  echo "Already installed"
+  echo
+elif [[ -x "$HOME/.local/bin/uv" ]]; then
+  echo "Found uv in ~/.local/bin, but not in path"
+  echo
+  echo "Adding ~/.local/bin to PATH"
+  export PATH="$PATH:$HOME/.local/bin"
+  echo
+else
+  echo "Installing uv..."
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  echo
+  if command -v uv &>/dev/null; then
+    echo "Adding ~/.local/bin to PATH"
+    export PATH="$PATH:$HOME/.local/bin"
+    echo
+  fi
+fi
+
+uv version
